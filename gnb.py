@@ -7,7 +7,7 @@ obs = data.values
 total_obs = len(data.values)
 
 
-age = input("Age \"<=30, 31-40 or >40\": ")
+age = input("\nAge \"<=30, 31-40 or >40\": ")
 income = input("Income \"high, medium or low\": ")
 student = input("Student \"yes or no\": ")
 cred_rating = input("Credit_rating \"fair or excellent\": ")
@@ -78,11 +78,12 @@ pxci_no = len_age_no * len_income_no * len_student_no * len_cred_rating_no
 p_yes = pxci_yes * pc_yes
 p_no = pxci_no * pc_no
 
-print("Yes: ",str(p_yes) + "No: ",str(p_no))
+print("Yes: ",str(p_yes) + "\nNo: ",str(p_no))
 
-print("Prediction: ")
 if p_yes > p_no:
-    print("Buys")
+    print("Prediction: Buys")
+elif p_yes < p_no:
+    print("Prediction: Won't Buy")
 else:
-    print("Won't Buy")
-
+    print("Something went terribly wrong :(\n")
+        
