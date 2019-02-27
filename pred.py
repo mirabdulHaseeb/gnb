@@ -5,4 +5,4 @@ income = input("Income \"high, medium or low\": ")
 student = input("Student \"yes or no\": ")
 cred_rating = input("Credit_rating \"fair or excellent\": ")
 
-obj = Gnb().gnb_algo(age, income, student, cred_rating)
+obj = Gnb(age,income,student,cred_rating).gnb_algo()

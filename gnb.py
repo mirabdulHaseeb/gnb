@@ -3,98 +3,90 @@ import pandas as pd
 class Gnb():
 
 
-    def gnb_algo(self, age, income, student, cred_rating):
+    def __init__(self, age, income, student, cred_rating):
         
         self.age = age
         self.income = income
         self.student = student
         self.cred_rating = cred_rating
 
-        data = pd.read_csv('computer_dataset.csv')
+    def gnb_algo(self):
+        self.data = pd.read_csv('computer_dataset.csv')
         #print(data.head())
-        obs = data.values
-        total_obs = len(data.values)
+        self.obs = self.data.values
+        self.total_obs = len(self.data.values)
 
-        class_label = []
+        self.class_label = []
 
-        age_yes = []
-        age_no = []
+        self.age_yes = []
+        self.age_no = []
 
-        income_yes = []
-        income_no = []
+        self.income_yes = []
+        self.income_no = []
 
-        student_yes = []
-        student_no = []
+        self.student_yes = []
+        self.student_no = []
 
-        cred_rating_yes = []
-        cred_rating_no = []
+        self.cred_rating_yes = []
+        self.cred_rating_no = []
 
-        for ob in obs:
+        for ob in self.obs:
             if ob[-1] == "yes":
-                class_label.append(ob[-1])
+                self.class_label.append(ob[-1])
 
-            if ob[0] == age and ob[-1] == "yes":
-                age_yes.append(ob[0])
-            if ob[0] == age and ob[-1] == "no":
-                age_no.append(ob[0])
+            if ob[0] == self.age and ob[-1] == "yes":
+                self.age_yes.append(ob[0])
+            if ob[0] == self.age and ob[-1] == "no":
+                self.age_no.append(ob[0])
 
-            if ob[1] == income and ob[-1] == "yes":
-                income_yes.append(ob[1])
-            if ob[1] == income and ob[-1] == "no":
-                income_no.append(ob[1])
+            if ob[1] == self.income and ob[-1] == "yes":
+                self.income_yes.append(ob[1])
+            if ob[1] == self.income and ob[-1] == "no":
+                self.income_no.append(ob[1])
 
-            if ob[2] == student and ob[-1] == "yes":
-                student_yes.append(ob[2])
-            if ob[2] == student and ob[-1] == "no":
-                student_no.append(ob[2])
+            if ob[2] == self.student and ob[-1] == "yes":
+                self.student_yes.append(ob[2])
+            if ob[2] == self.student and ob[-1] == "no":
+                self.student_no.append(ob[2])
 
-            if ob[3] == cred_rating and ob[-1] == "yes":
-                cred_rating_yes.append(ob[3])
-            if ob[3] == cred_rating and ob[-1] == "no":
-                cred_rating_no.append(ob[3])
+            if ob[3] == self.cred_rating and ob[-1] == "yes":
+                self.cred_rating_yes.append(ob[3])
+            if ob[3] == self.cred_rating and ob[-1] == "no":
+                self.cred_rating_no.append(ob[3])
 
 
-        total_yes = len(class_label)
-        total_no = total_obs - total_yes
+        self.total_yes = len(self.class_label)
+        self.total_no = self.total_obs - self.total_yes
 
         #P(Ci)
-        pc_yes = total_yes/total_obs
-        pc_no = total_no/total_obs
+        self.pc_yes = self.total_yes/self.total_obs
+        self.pc_no = self.total_no/self.total_obs
 
-        len_age_yes = len(age_yes)/total_yes
-        len_age_no = len(age_no)/total_no
+        self.len_age_yes = len(self.age_yes)/self.total_yes
+        self.len_age_no = len(self.age_no)/self.total_no
 
-        len_income_yes = len(income_yes)/total_yes
-        len_income_no = len(income_no)/total_no
+        self.len_income_yes = len(self.income_yes)/self.total_yes
+        self.len_income_no = len(self.income_no)/self.total_no
 
-        len_student_yes = len(student_yes)/total_yes
-        len_student_no = len(student_no)/total_no
+        self.len_student_yes = len(self.student_yes)/self.total_yes
+        self.len_student_no = len(self.student_no)/self.total_no
 
-        len_cred_rating_yes = len(cred_rating_yes)/total_yes
-        len_cred_rating_no = len(cred_rating_no)/total_no
+        self.len_cred_rating_yes = len(self.cred_rating_yes)/self.total_yes
+        self.len_cred_rating_no = len(self.cred_rating_no)/self.total_no
 
         #P(X|Ci)
-        pxci_yes = len_age_yes * len_income_yes * len_student_yes * len_cred_rating_yes
-        pxci_no = len_age_no * len_income_no * len_student_no * len_cred_rating_no
+        self.pxci_yes = self.len_age_yes * self.len_income_yes * self.len_student_yes * self.len_cred_rating_yes
+        self.pxci_no = self.len_age_no * self.len_income_no * self.len_student_no * self.len_cred_rating_no
 
         #P(X|Ci)*P(Ci)
-        p_yes = pxci_yes * pc_yes
-        p_no = pxci_no * pc_no
+        self.p_yes = self.pxci_yes * self.pc_yes
+        self.p_no = self.pxci_no * self.pc_no
 
-        print("Yes: ",str(p_yes) + "\nNo: ",str(p_no))
+        print("Yes: ",str(self.p_yes) + "\nNo: ",str(self.p_no))
 
-        if p_yes > p_no:
+        if self.p_yes > self.p_no:
             print("Prediction: Buys")
-        elif p_yes < p_no:
+        elif self.p_yes < self.p_no:
             print("Prediction: Won't Buy")
         else:
             print("Something went terribly wrong :(\n")
-
-"""
-age = input("\nAge \"<=30, 31-40 or >40\": ")
-income = input("Income \"high, medium or low\": ")
-student = input("Student \"yes or no\": ")
-cred_rating = input("Credit_rating \"fair or excellent\": ")
-
-obj = Gnb().gnb_algo(age, income, student, cred_rating)
-"""
