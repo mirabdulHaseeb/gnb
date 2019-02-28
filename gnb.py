@@ -82,11 +82,11 @@ class Gnb():
         self.p_yes = self.pxci_yes * self.pc_yes
         self.p_no = self.pxci_no * self.pc_no
 
-        print("Yes: ",str(self.p_yes) + "\nNo: ",str(self.p_no))
+        print("Yes: ",str(self.p_yes) + "\nNo : ",str(self.p_no))
 
         if self.p_yes > self.p_no:
-            print("Prediction: Buys")
+            print("Prediction: Buys\n")
         elif self.p_yes < self.p_no:
-            print("Prediction: Does not Buy")
+            print("Prediction: Does not Buy\n")
         else:
             print("Something went terribly wrong :(\n")
