@@ -12,7 +12,7 @@ class Gnb():
 
     def gnb_algo(self):
         self.data = pd.read_csv('computer_dataset.csv')
-        #print(data.head())
+        
         self.obs = self.data.values
         self.total_obs = len(self.data.values)
 
@@ -87,6 +87,6 @@ class Gnb():
         if self.p_yes > self.p_no:
             print("Prediction: Buys")
         elif self.p_yes < self.p_no:
-            print("Prediction: Won't Buy")
+            print("Prediction: Does not Buy")
         else:
             print("Something went terribly wrong :(\n")
