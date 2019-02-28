@@ -1,2 +1,2 @@
 gnbenv
-*.pyc
+__pycache__
